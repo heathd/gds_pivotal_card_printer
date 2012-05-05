@@ -21,7 +21,7 @@ module GdsPivotalCardPrinter
       puts "Connecting to Pivotal Tracker..."
       project = PivotalTracker::Project.find(configuration.project_id)
       iteration = if iteration_selector == :current
-        project.iterations.current
+        project.iteration(:current)
       else
         project.iterations.all(offset: iteration_selector-1, limit: 1).first
       end

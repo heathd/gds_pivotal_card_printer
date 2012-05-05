@@ -1,7 +1,10 @@
 Gds Pivotal Card Printer
 ========================
 
-This program generates a PDF file from pivotal tickets in a single iteration.
+This program generates a PDF file from pivotal tickets in a single iteration. The generated PDF file is A4 format with two cards per page, ready for printing.
+
+Configuration
+-------------
 
 To use the program you need to create a configuration file ```~/.pivotal.yml``` containing:
 
@@ -13,8 +16,8 @@ The token can be found on the 'profile' page in pivotal at https://www.pivotaltr
 The project ID number appears in the URL when accessing a project, e.g.
 https://www.pivotaltracker.com/projects/500023
 
-Usage:
-------
+Usage
+-----
 
     # print cards from the current iteration
     ./gds_pivotal_card_printer current
@@ -22,4 +25,3 @@ Usage:
     # print cards from a specific iteration
     ./gds_pivotal_card_printer iteration 5
     
-The generated PDF file is A4 format with two cards per page, ready for printing.

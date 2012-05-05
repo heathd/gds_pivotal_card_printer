@@ -106,15 +106,18 @@ module GdsPivotalCardPrinter
     def render_story_description(story)
       text = story.description || ""
       text = first_paragraph_of(text) if story.story_type == 'feature'
-
-      @pdf.fill_color "444444"
-      @pdf.move_down 5.mm
-      @pdf.text_box text, 
-        size: 10.mm,
-        inline_format: true,
-        at: [0, @pdf.cursor],
-        height: @pdf.cursor - 16.mm,
-        overflow: :shrink_to_fit
+      @pdf.fill_color "666666"
+      @pdf.move_down 9.mm
+      @pdf.font "Times-Roman" do
+        leading = count_lines(text) > 2 ? 1 : 6
+        @pdf.text_box text, 
+          size: 9.mm,
+          inline_format: true,
+          at: [0, @pdf.cursor],
+          height: @pdf.cursor - 18.mm,
+          leading: leading,
+          overflow: :shrink_to_fit
+      end
     end
   
     def render_story_points(story, padding_y)
@@ -129,7 +132,7 @@ module GdsPivotalCardPrinter
     end
   
     def render_story_type(story, padding_y)
-      @pdf.fill_color "999999"
+      @pdf.fill_color "aaaaaa"
       @pdf.text_box story.story_type.capitalize, 
         :size => 12.mm,
         :align => :right, 
@@ -154,9 +157,17 @@ module GdsPivotalCardPrinter
         "Not yet estimated"
       end
     end
+    
+    def count_lines(text)
+      text.split("\n").size
+    end
+    
+    def paragraphs(text)
+      (text || "").split(/(?:(?:\n|\r\n)[\r\t ]*){2,}/)
+    end
+    
     def first_paragraph_of(text)
-      paras = (text || "").split(/(?:(?:\n|\r\n)[\r\t ]*){2,}/)
-      paras[0] || ""
+      paragraphs(text)[0] || ""
     end
   end
 end

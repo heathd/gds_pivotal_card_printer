@@ -59,8 +59,8 @@ module GdsPivotalCardPrinter
       @pdf.line_width = card_border_width
 
       @pdf.stroke_rectangle [card_left_edge, offset], card_width, card_height
-      padding_x = card_border_width / 2 + 5.mm
-      padding_y = card_border_width / 2.0 + 5.mm
+      padding_x = card_border_width / 2 + 6.mm
+      padding_y = card_border_width / 2 + 6.mm
     
       @pdf.bounding_box(
         [card_left_edge + padding_x, offset - padding_y],
@@ -69,8 +69,8 @@ module GdsPivotalCardPrinter
 
         render_crest
         render_story_title(story)
-        render_story_tags(story)
-        render_story_description(story)
+        # render_story_tags(story)
+        # render_story_description(story)
         render_story_points(story, padding_y)
         render_story_type(story, padding_y)
 
@@ -90,7 +90,8 @@ module GdsPivotalCardPrinter
   
     def render_story_title(story)
       @pdf.fill_color "000000"
-      @pdf.text story.name, :size => 15.mm, :inline_format => true
+      @pdf.text story.name, :size => 18.mm, :inline_format => true, :align => :center
+
     end
   
     def render_story_tags(story)
@@ -98,7 +99,7 @@ module GdsPivotalCardPrinter
       if ! label_text.empty?
         @pdf.image image_path("label_icon.jpg"), at: [0, @pdf.cursor], fit: [6.mm, 6.mm]
         @pdf.fill_color "52D017"
-        @pdf.text_box label_text, :size => 8.mm, at: [12.mm, @pdf.cursor]
+        @pdf.text_box label_text, :size => 7.mm, at: [12.mm, @pdf.cursor]
         @pdf.move_down 10.mm
       end
     end

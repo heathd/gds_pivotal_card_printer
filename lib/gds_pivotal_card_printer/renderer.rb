@@ -144,9 +144,11 @@ module GdsPivotalCardPrinter
   
     def story_color(story)
       case story.story_type
-      when "feature" then "52D017"
-      when "bug" then "FF0000"
-      when "chore" then "FFFF00"
+        
+    def colour(type)
+      when "feature" then "85994b"
+      when "bug" then "b10e1e"
+      when "chore" then "b58840"
       else "000000"
       end
     end

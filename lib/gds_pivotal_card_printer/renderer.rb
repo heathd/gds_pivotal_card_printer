@@ -69,11 +69,9 @@ module GdsPivotalCardPrinter
 
         render_crest
         render_story_title(story)
-        # render_story_tags(story)
-        # render_story_description(story)
+        render_story_description(story)
         render_story_points(story, padding_y)
         render_story_type(story, padding_y)
-
       end
     end
 

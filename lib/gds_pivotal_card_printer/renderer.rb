@@ -155,7 +155,7 @@ module GdsPivotalCardPrinter
       if story.respond_to?(:estimate) && !story.estimate.eql?(-1)
         story.estimate.to_s
       else
-        "Not yet estimated"
+        ""
       end
     end
     

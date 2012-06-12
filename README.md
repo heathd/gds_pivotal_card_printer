@@ -19,9 +19,15 @@ https://www.pivotaltracker.com/projects/500023
 Usage
 -----
 
-    # print cards from the current iteration
-    ./gds_pivotal_card_printer current
+First, install the gem dependencies:
+
+    $ bundle install
+
+Then you can print cards from the current iteration:
+
+    $ ./gds_pivotal_card_printer current
     
-    # print cards from a specific iteration
-    ./gds_pivotal_card_printer iteration 5
+or print cards from a specific iteration:
+
+    $ ./gds_pivotal_card_printer iteration 5
     

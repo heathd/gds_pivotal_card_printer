@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env bundle exec ruby
 
 require 'yaml'
 require 'pivotal_tracker'

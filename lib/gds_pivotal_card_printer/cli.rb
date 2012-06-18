@@ -11,15 +11,40 @@ module GdsPivotalCardPrinter
     def iteration(iteration_number)
       render iteration_number.to_i
     end
+
+    desc "label LABEL", "print all stories with a given label"
+    def label(label)
+      render_label(label)
+    end
   
     private
-    def render(iteration_selector)
+
+    def setup_project_to_render
       configuration = Configuration.load
       PivotalTracker::Client.token = configuration.token
       PivotalTracker::Client.use_ssl = true
 
       puts "Connecting to Pivotal Tracker..."
       project = PivotalTracker::Project.find(configuration.project_id)
+      return project
+    end
+
+    def render_label(label)
+      project = setup_project_to_render
+      stories = project.stories.all(label: label)
+
+      puts "  #{stories.size} stories."
+      puts ""
+
+      renderer = Renderer.new(stories)
+      output_filename = "label-#{label}.pdf"
+      renderer.render_to(output_filename)
+      puts "Wrote #{stories.size} stories to #{output_filename}"
+    end
+
+    def render(iteration_selector)
+      project = setup_project_to_render
+
       iteration = if iteration_selector == :current
         project.iteration(:current)
       else
@@ -31,6 +56,7 @@ module GdsPivotalCardPrinter
         "#{(iteration.finish - 1).strftime("%a %d/%m/%y")}"
 
       stories = iteration.stories
+
       puts "  #{stories.size} stories."
 
       puts ""

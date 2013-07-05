@@ -132,12 +132,21 @@ module GdsPivotalCardPrinter
   
     def render_story_type(story, padding_y)
       @pdf.fill_color "aaaaaa"
-      @pdf.text_box story.story_type.capitalize, 
+      @pdf.text_box story_type(story).capitalize, 
         :size => 12.mm,
         :align => :right, 
         :at => [@pdf.bounds.right - 80.mm, padding_y + 12.mm], 
         :width => 80.mm,
         valign: :bottom
+    end
+
+    def story_type(story)
+      if story.story_type == "chore" and
+          (story.name.downcase.start_with?('spike') or story.name.end_with?('?'))
+        "spike"
+      else
+        story.story_type
+      end
     end
   
     def story_color(story)

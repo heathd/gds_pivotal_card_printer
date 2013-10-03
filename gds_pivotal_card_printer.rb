@@ -7,6 +7,7 @@ require 'slop'
 require_relative "lib/gds_pivotal_card_printer/configuration"
 require_relative "lib/gds_pivotal_card_printer/renderer"
 require_relative "lib/gds_pivotal_card_printer/a6_renderer"
+require_relative "lib/gds_pivotal_card_printer/six_by_four_renderer"
 require_relative "lib/gds_pivotal_card_printer/jobs"
 
 # to debug connection issues
@@ -30,6 +31,7 @@ class Cli
 
   def layouts
     {
+      "6x4" => GdsPivotalCardPrinter::SixByFourRenderer,
       "a6" => GdsPivotalCardPrinter::A6Renderer,
       "a5" => GdsPivotalCardPrinter::Renderer
     }

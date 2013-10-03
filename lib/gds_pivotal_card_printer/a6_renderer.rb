@@ -11,7 +11,7 @@ module GdsPivotalCardPrinter
       "four a6 cards on one a4 sheet"
     end
 
-    def initialize(stories)
+    def initialize(stories, opts = {})
       @stories = stories
       @scale = 1
       @cards_per_page = 4

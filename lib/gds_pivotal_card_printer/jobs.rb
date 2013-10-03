@@ -22,12 +22,30 @@ module GdsPivotalCardPrinter
       raise "not implemented"
     end
 
+
+    def report_stories(stories)
+      require 'csv'
+      total_estimate = 0
+      fields = %w{id current_state estimate name labels}
+      puts fields.to_csv
+      stories.each do |story|
+        total_estimate += story.estimate if story.estimate
+        puts fields.map {|f| story.send(f.to_sym)}.to_csv
+      end
+
+      puts "Total estimate: #{total_estimate}"
+    end
+
     def render
       puts "  #{stories.size} stories."
 
       puts ""
-      renderer = @renderer_class.new(stories)
+      opts = {}
+      opts[:iteration] = self.iteration if respond_to?(:iteration)
+      renderer = @renderer_class.new(stories, opts)
       renderer.render_to(output_filename)
+
+      report_stories(stories)
       puts "Wrote #{stories.size} stories to #{output_filename}"
     end
   end

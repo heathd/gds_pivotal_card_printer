@@ -5,7 +5,7 @@ GEM
     builder (3.0.0)
     happymapper (0.4.0)
       libxml-ruby (~> 2.0)
-    libxml-ruby (2.3.2)
+    libxml-ruby (2.7.0)
     mime-types (1.18)
     nokogiri (1.5.2)
     pdf-reader (1.1.0)
